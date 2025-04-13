@@ -1,0 +1,18 @@
+
+{
+  "schema_version": "v1",
+  "name_for_human": "Webhook Forwarder 1",
+  "name_for_model": "webhook_forwarder_1",
+  "description_for_human": "שליחת נתונים לכתובת Webhook חיצונית",
+  "description_for_model": "שלח נתוני JSON לכתובת Webhook לצורכי בדיקות או ניתוב.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://oz-gpt-forwarder.onrender.com/.well-known/openapi1.yaml"
+  },
+  "logo_url": "https://oz-clinic.co.il/logo.png",
+  "contact_email": "support@oz-clinic.co.il",
+  "legal_info_url": "https://oz-clinic.co.il/legal"
+}

@@ -1,0 +1,31 @@
+
+openapi: 3.0.1
+info:
+  title: Webhook Forwarder API 1
+  description: שליחת JSON לכל Webhook
+  version: '1.0.0'
+servers:
+  - url: https://oz-gpt-forwarder.onrender.com
+paths:
+  /forward:
+    post:
+      summary: שליחת נתוני JSON ל־Webhook
+      operationId: forwardWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                table:
+                  type: string
+                row_data:
+                  type: object
+                  additionalProperties:
+                    type: string
+      responses:
+        '200':
+          description: נשלח בהצלחה
