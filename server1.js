@@ -12,14 +12,21 @@ app.use((req, res, next) => {
 });
 
 app.post('/forward', async (req, res) => {
+  const payload = req.body;
+  console.log("📥 Payload received:", JSON.stringify(payload, null, 2));
+
   try {
-    const payload = req.body;
-    await axios.post('https://webhook.site/1b12c044-80b6-4f55-8a9c-ed78e49d1872', payload, {
-      headers: { 'Content-Type': 'application/json' }
-    });
+    const response = await axios.post(
+      'https://webhook.site/1b12c044-80b6-4f55-8a9c-ed78e49d1872',
+      payload,
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+    console.log("✅ Forwarded successfully! Status:", response.status);
     res.status(200).send({ success: true });
   } catch (err) {
-    console.error(err.message);
+    console.error("❌ Forwarding failed:", err.response?.data || err.message);
     res.status(500).send({ success: false, error: err.message });
   }
 });
