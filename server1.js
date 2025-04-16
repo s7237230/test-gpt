@@ -3,7 +3,7 @@ const axios = require('axios');
 const app = express();
 app.use(express.json());
 
-// ✅ הוספת CORS לאפשר גישה מבחוץ (כולל GPT)
+// ✅ CORS - לאפשר גישה מבחוץ (כולל GPT)
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
@@ -13,7 +13,7 @@ app.use((req, res, next) => {
 
 app.post('/forward', async (req, res) => {
   const payload = req.body;
-  console.log("📥 Payload received:", JSON.stringify(payload, null, 2));
+  console.log("📥 Payload received:\n", JSON.stringify(payload, null, 2));
 
   try {
     const response = await axios.post(
@@ -23,14 +23,20 @@ app.post('/forward', async (req, res) => {
         headers: { 'Content-Type': 'application/json' }
       }
     );
+
     console.log("✅ Forwarded successfully! Status:", response.status);
     res.status(200).send({ success: true });
+
   } catch (err) {
-    console.error("❌ Forwarding failed:", err.response?.data || err.message);
+    console.error("❌ Forwarding failed:");
+    console.error("Full Error:", err);
+    console.error("Message:", err.message);
+    console.error("Stack:", err.stack);
     res.status(500).send({ success: false, error: err.message });
   }
 });
 
+// 🔎 מסלולים עבור הפלאגין
 app.get('/.well-known/ai-plugin1.json', (req, res) => {
   res.sendFile(__dirname + '/ai-plugin1.json');
 });
