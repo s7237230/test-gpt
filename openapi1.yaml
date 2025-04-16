@@ -1,5 +1,4 @@
-
-openapi: 3.0.1
+openapi: 3.1.0
 info:
   title: Webhook Forwarder API 1
   description: שליחת JSON לכל Webhook
@@ -17,15 +16,27 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - action
+                - table
+                - row_data
               properties:
                 action:
                   type: string
+                  example: insert_row
                 table:
                   type: string
+                  example: DB MASTER
                 row_data:
                   type: object
                   additionalProperties:
                     type: string
-      responses:
-        '200':
-          description: נשלח בהצלחה
+                  example:
+                    "1": "יוסי לוי"
+                    "2": "050-1234567"
+                    "3": "טלפון"
+                    "4": "מתעניין בקנייה"
+                    "5": "חם"
+                    "6": "לחזור אליו"
+                    "7": "פיילוט"
+                    "9": "2025-04-13"
